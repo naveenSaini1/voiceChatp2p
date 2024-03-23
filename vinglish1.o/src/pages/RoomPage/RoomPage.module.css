@@ -1,0 +1,150 @@
+ .roomPageMainContainer{
+    width: 80%;
+    padding: 6px 5px;
+} 
+
+.roomTitle{
+    font-size: 30px;
+    font-family: sans-serif;
+}
+.roomContainer{
+    min-height: 100px;
+}
+.createButton {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: green;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+    display: block;
+    margin:auto;
+    border-radius: 37px;
+  }
+  
+  .createButton:hover,
+  .createButton:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  }
+  
+  .createButton:hover {
+    transform: translateY(-1px);
+  }
+  
+  .createButton:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+  }
+  
+  /* Assuming styles is imported and contains the CSS classes */
+.createRoomPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.createRoomCloseUp {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.createRoomCloseUp:hover {
+    color: #ff0000; /* Change color on hover */
+}
+
+.createRoomPopup input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+.createRoomPopup button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.createRoomPopup button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+  /* Styling the close "X" button */
+.createRoomCloseUp {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #aaaaaa; /* Default color */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.createRoomCloseUp:hover {
+    color: #ff0000; /* Change color on hover */
+}
+
+/* Styling the input fields */
+.createRoomPopup input[type="text"] {
+    width: calc(100% - 22px); /* Adjusting width to accommodate padding and border */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    outline: none; /* Removing default focus outline */
+}
+
+.createRoomPopup input[type="text"]:focus {
+    border-color: #007bff; /* Change border color on focus */
+}
+
+/* Styling the create button */
+.createRoomPopup button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.createRoomPopup button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}

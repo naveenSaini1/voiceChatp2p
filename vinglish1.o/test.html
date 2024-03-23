@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <video id="video" src="" autoplay controls ></video>
+    <button>start</button>
+    <button>stop</button>
+    <button id="Print">print</button>
+    <button id="addVideo">addvideo</button>
+
+    <div id="div"></div>
+    <script src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js"> </script>
+
+</body>
+<script>
+    let stream;
+    let video= document.getElementById("video");
+    let btn=document.getElementById("Print");
+    let addVideo=document.getElementById("addVideo");
+
+    let chunk=[];
+    let media;
+
+async function startCam(){
+    stream= await navigator.mediaDevices.getUserMedia({video:true,audio:false})
+   video.srcObject=stream;
+     media=new MediaRecorder(stream);
+    media.ondataavailable=(e)=>{
+        chunk.push(e.data);
+        // hi(e.data);
+        // console.log("ondata called",chunk)
+        const blob = new Blob([e.data], { type: 'video/webm' });
+  const url = URL.createObjectURL(blob);
+  
+  const a = document.createElement('a');
+  document.body.appendChild(a);
+  a.style = 'display: none';
+  a.href = url;
+  a.download = 'recorded-video.webm';
+  a.click();
+  
+  window.URL.revokeObjectURL(url);
+       // chunk=[];
+
+    }
+  // media.start(5000);
+}
+
+startCam();
+
+function hi(blob){
+    var file = new File([blob], 'msr-' + (new Date).toISOString().replace(/:|\./g, '-') + '.webm', {
+        type: 'video/webm'
+    });
+    //console.log(file);
+}
+
+// btn.addEventListener("click",function(){
+//     console.log("btn clicked")
+//     media.requestData();
+//     console.log(chunk);
+//     printvideos();
+    
+
+
+// })
+
+// function printvideos(){
+//     console.log(chunk);
+    
+
+// }
+
+// addVideo.addEventListener("click",function(){
+//     console.log("btn clicked")
+//     let div=document.getElementById("div");
+//     div.innerHTML='';
+//     let video=document.createElement("video")
+//     video.controls=true;
+    
+//     let blob=new Blob(chunk);
+//     console.log("blob",blob)
+//     video.src=window.URL.createObjectURL(blob);
+//     div.append(video);
+    
+
+
+// })
+function demoForByte(byte){
+       let div=document.getElementById("div");
+   
+    let video=document.createElement("video")
+    video.controls=true;
+    
+    let blob=new Blob(byte);
+    console.log("blob",blob)
+    video.src=window.URL.createObjectURL(blob);
+    div.append(video); 
+
+}
+</script>
+</html>
