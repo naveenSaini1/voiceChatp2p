@@ -10,6 +10,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
@@ -27,7 +28,11 @@ public class CallingController {
 	
 	 static List<String>  connectedUser=new ArrayList<>();
 	
-	
+	@GetMapping("/")
+	public String getFirstData() {
+		return "hello";
+	}
+	 
 	@MessageMapping("/makeCall")
 	public void firstMakeCall(@Payload Map<String,String> object,SimpMessageHeaderAccessor headerAccessor){
 		System.out.println(object.get("email"));

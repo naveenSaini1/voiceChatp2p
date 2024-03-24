@@ -14,7 +14,7 @@ function UserAuthProvider({ children }) {
 
     useEffect(() => {
         if (user != null) {
-            const socket = new SockJS('https://test001-production.up.railway.app/wss');
+            const socket = new SockJS('http://13.60.13.85:8080/wss');
             const stomp = Stomp.over(socket);
             stomp.connect({}, () => {
                 console.log('WebSocket connected');
