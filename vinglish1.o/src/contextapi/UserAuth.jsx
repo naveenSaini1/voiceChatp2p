@@ -14,7 +14,7 @@ function UserAuthProvider({ children }) {
 
     useEffect(() => {
         if (user != null) {
-            const socket = new SockJS('http://13.60.40.192:8080/ws');
+            const socket = new SockJS('https://api.englishifi.com/wss');
             const stomp = Stomp.over(socket);
             stomp.connect({}, () => {
                 console.log('WebSocket connected');
