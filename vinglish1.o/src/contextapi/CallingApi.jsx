@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { UserAuth } from "./UserAuth";
 
 
@@ -11,7 +11,46 @@ const CallingApiContextProvider = ({ children }) => {
     const [remoteStream, setRemoteStream] = useState();
     const mystreamRef = useRef();
     const [isCallLoading, setIsCallLoading] = useState(false);
+    const handleDownloadStream=useCallback(()=>{
+         console.log("hello",mystreamRef.current);
+         const mediaStream=new MediaRecorder(mystreamRef.current);
+         mediaStream.ondataavailable=(event)=>{
+            console.log(event.data);
+            const formData = new FormData();
+            formData.append('file', event.data);
+           formData.append('name', user.email);
 
+
+            fetch('http://localhost:8080/upload', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            // Handle response from server
+            })
+            .catch(error => {
+                console.log(error);
+            // Handle errors
+            });
+
+         }
+         mediaStream.start(10000);
+    },[])
+
+    const handledStopRecoding=useCallback(()=>{
+        const formData=new FormData();
+        formData.append("name",user.email)
+        fetch(`http://localhost:8080/stopRecoding`,{
+            method:"POST",
+            body:formData
+        })
+        .then(()=>{
+
+        })
+        .catch((error)=>{
+            console.log("line: 50 ",error);
+        })
+    },[])
     useEffect(() => {
         const configuration = { "iceServers": [{ "url": "stun:stun.l.google.com:19302" }] };
         const peerConnection = new RTCPeerConnection(configuration);
@@ -24,6 +63,7 @@ const CallingApiContextProvider = ({ children }) => {
             else if(peerConnection.connectionState === 'connected'){
                 setIsCallLoading((pre) => !pre);
                 setOnCall((pre) => !pre)
+                handleDownloadStream();
                
             }
         };
@@ -32,6 +72,7 @@ const CallingApiContextProvider = ({ children }) => {
             if (peerConnection) {
                 console.log("current ref", mystreamRef.current);
                 handleToOfMyNavigatore();
+                handledStopRecoding();
                 peerConnection.close();
             }
         }
@@ -97,6 +138,7 @@ const CallingApiContextProvider = ({ children }) => {
         return () => {
 
             subscription_Chenal_2?.unsubscribe();
+            
 
         }
 
